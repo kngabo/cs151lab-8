@@ -1,0 +1,32 @@
+Adam is in King 125B
+Howard is in King 139C
+Jackie is in King 139
+Emily is in King 139A
+Cynthia is in King 139B
+Josh is in King 229
+Steve is in King 231
+Molly is in King 223A
+Michael is in King 223B
+Lucas is in King 223C
+
+Adam is in King 125B
+Cynthia is in King 139B
+Emily is in King 139A
+Howard is in King 139C
+Jackie is in King 139
+Josh is in King 229
+Lucas is in King 223C
+Michael is in King 223B
+Molly is in King 223A
+Steve is in King 231
+
+Adam is in King 125B
+Jackie is in King 139
+Emily is in King 139A
+Cynthia is in King 139B
+Howard is in King 139C
+Molly is in King 223A
+Michael is in King 223B
+Lucas is in King 223C
+Josh is in King 229
+Steve is in King 231
