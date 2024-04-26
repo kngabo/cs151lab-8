@@ -1,0 +1,7 @@
+1. Which Comparator led to the fewest number of missed deadlines?
+    Deadline Comparator: This comparator resulted in 41 missed deadlines.
+2. Which Comparator led to the fewest milliseconds of missed deadlines?
+    Deadline Comparator: This comparator had 10,332 milliseconds over the missed deadlines.
+3. Which Comparator led to the fewest priority inversions?
+    The Priority Comparator led to the fewest priority inversions, which is zero. 
+
