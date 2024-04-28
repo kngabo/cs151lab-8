@@ -87,7 +87,7 @@ public class MyHashMap<K, V> {
 
         if(bucket != null){
             for (SimpleEntry<K, V> entry : bucket) {
-                if(entry.getKey() == key){
+                if(key.equals(entry.getKey())){
                     return entry;
                 }
             }
@@ -181,7 +181,7 @@ public class MyHashMap<K, V> {
     public boolean containsValue(V value){
         for (LinkedList<SimpleEntry<K, V>> bucket : this.hashtable) {
             for (SimpleEntry<K,V> entry : bucket) {
-                if(entry.getValue() == value){
+                if(value.equals(entry.getValue())){
                     return true;
                 }
             }

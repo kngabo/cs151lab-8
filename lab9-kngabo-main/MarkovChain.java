@@ -66,15 +66,11 @@ public class MarkovChain {
             this.transitions.put(history, trans);
             trans.addTransition(nextCharacter);
             
-
-            // System.out.println(this.transitions.get(history).counts.entrySet()) ;
         }else{
             trans = this.transitions.get(history);
             trans.addTransition(nextCharacter);
-        }
-
-        System.out.println(trans.totalCount);
-        
+            // System.out.println(this.transitions.get(history).counts.entrySet()) ;
+        }        
         
     }
 
