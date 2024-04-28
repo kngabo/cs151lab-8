@@ -9,11 +9,12 @@ import java.security.SecureRandom;
  * This class represents an n-order Markov Chain model, where each 
  * state is a character. 
  * 
- * @author Your Name Here!
+ * @author Kelig
  */
 public class MarkovChain {
     /* TODO: add your instance variables here. */
-
+    private MyHashMap<String, Transitions<Character>> transitions;
+    private int order;
     /**
      * Create a new Markov model with the given order.
      * 
@@ -21,6 +22,8 @@ public class MarkovChain {
      */
     public MarkovChain(int order) {
         /* TODO: implement this constructor */
+        this.order = order;
+        this.transitions = new MyHashMap<String, Transitions<Character>>();
     }
 
     /**
@@ -34,6 +37,13 @@ public class MarkovChain {
         assert (input.length() >= this.order);
 
         /* TODO: implement this method */
+        int n = this.order;
+        for (int i = 0; i <= input.length() - n - 1; i++) {
+            String history = input.substring(i, n + i);
+            Character nextCharacter = input.charAt(n + i);
+            updateCount(history, nextCharacter);
+        }
+        
     }
 
     /**
@@ -49,6 +59,23 @@ public class MarkovChain {
         assert (history.length() == this.order);
         
         /* TODO: implement this method */
+        Transitions<Character>  trans;
+
+        if(!this.transitions.containsKey(history)){
+            trans = new Transitions<>();
+            this.transitions.put(history, trans);
+            trans.addTransition(nextCharacter);
+            
+
+            // System.out.println(this.transitions.get(history).counts.entrySet()) ;
+        }else{
+            trans = this.transitions.get(history);
+            trans.addTransition(nextCharacter);
+        }
+
+        System.out.println(trans.totalCount);
+        
+        
     }
 
     /**
@@ -67,6 +94,21 @@ public class MarkovChain {
      */
     public String generate(String start, int length, Random rand) {
         /* TODO: implement this method */
+
+        String string =  start;
+        String current = start;
+
+        for (int i = 1; i < length; i++) {
+            Transitions<Character> trans = transitions.get(current);
+            if (trans != null) {
+                char next = trans.generateNextState(rand);
+                string += next;
+                current = string.substring(string.length() - this.order , string.length());
+            }
+        }
+
+        return string;
+        
     }
 
     /**

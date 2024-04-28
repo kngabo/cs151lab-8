@@ -86,9 +86,9 @@ public class MyHashMap<K, V> {
         LinkedList<SimpleEntry<K, V>> bucket = hashtable[index];
 
         if(bucket != null){
-            for (SimpleEntry<K, V> value : bucket) {
-                if(value.getKey() == key){
-                    return value;
+            for (SimpleEntry<K, V> entry : bucket) {
+                if(entry.getKey() == key){
+                    return entry;
                 }
             }
         }    
@@ -106,21 +106,88 @@ public class MyHashMap<K, V> {
         return null;
     }
 
-        private void insert(SimpleEntry<K, V> entry){
-            
-            K key = entry.getKey();
+    private void insert(SimpleEntry<K, V> entry){
+        
+        K key = entry.getKey();
+        int hash = key.hashCode() & Integer.MAX_VALUE;
+        int index = hash % this.hashtable.length;
+        LinkedList<SimpleEntry<K, V>> bucket = hashtable[index];
+        bucket.add(entry);
+    }
 
-            if(find(key) != null){
-                int hash = key.hashCode() & Integer.MAX_VALUE;
-                int index = hash % this.hashtable.length;
-                LinkedList<SimpleEntry<K, V>> bucket = hashtable[index];
-                bucket.add(entry);
+    private void removeEntry(SimpleEntry<K, V> entry){
+        K key = entry.getKey();
+        int hash = key.hashCode() & Integer.MAX_VALUE;
+        int index = hash % this.hashtable.length;
+        LinkedList<SimpleEntry<K, V>> bucket = hashtable[index];
+        bucket.remove(entry);
+    }
+
+    private void resize(){
+        LinkedList<SimpleEntry<K, V>>[] oldHashtable = this.hashtable.clone();
+        this.hashtable = createTable(oldHashtable.length * 2);
+
+        for(LinkedList<SimpleEntry<K, V>> bucket: oldHashtable){
+            for(SimpleEntry<K, V> entry : bucket){
+                put(entry.getKey(), entry.getValue());
             }
         }
+    }
 
-        private void resize(){
-            LinkedList<SimpleEntry<K, V>>[] oldHashtable = this.hashtable;
-            LinkedList<SimpleEntry<K, V>>[] newHashtable = createTable(oldHashtable.length * 2);
+    public V put(K key, V value){
+
+        if(this.size > LOAD_FACTOR * this.hashtable.length){
+            resize();
         }
+        
+        if(find(key) != null){
+            V pValue = find(key).getValue();
+            SimpleEntry<K, V> entry = find(key);
+            entry.setValue(value);
+            return pValue;
+        }else{
+            SimpleEntry<K, V> newKey = new SimpleEntry<K, V>(key, value);
+            insert(newKey);
+            this.size++;
+        }
+        
+        return null;
+    }
+
+    public V remove(K key){
+
+        if(find(key) != null){
+            V pValue = find(key).getValue();
+            SimpleEntry<K, V> entry = find(key);
+            removeEntry(entry);
+            this.size--;
+            return pValue;
+        }
+        return null;
+    }
+
+    public Set<SimpleEntry<K, V>> entrySet(){
+        HashSet<SimpleEntry<K, V>> hashSet = new HashSet<>();
+        for (LinkedList<SimpleEntry<K, V>> entry : this.hashtable) {
+            hashSet.addAll(entry);
+        }
+        return hashSet;
+    }
+
+    public boolean containsKey(K key){
+        return find(key) != null;
+    }
+
+    public boolean containsValue(V value){
+        for (LinkedList<SimpleEntry<K, V>> bucket : this.hashtable) {
+            for (SimpleEntry<K,V> entry : bucket) {
+                if(entry.getValue() == value){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
