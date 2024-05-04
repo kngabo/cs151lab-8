@@ -1,0 +1,40 @@
+"Failure", "FWGC|", "WGC|F", "GC|WF", "WC|GF", "WG|CF", "FC|WG", "C|WGF", "FGC|W", "FWC|G", "W|GCF", "FW|GC", "FWG|C", "G|WCF", "FG|WC", "|WGCF"
+
+("Failure", "FC|WG"); ("Failure", "WGC|F"); ("Failure", "GC|WF"); ("Failure", "WG|CF"); ("Failure", "FW|GC"); ("FWGC|", "GC|WF"); ("FWGC|", "WC|GF"); ("FWGC|", "WGC|F"); ("FWGC|", "WG|CF"); ("FC|WG", "C|WGF"); ("WC|GF", "FWC|G"); ("GC|WF", "FGC|W"); ("WG|CF", "FWG|C"); ("C|WGF", "FWC|G"); ("FWC|G", "W|GCF"); ("W|GCF", "FW|GC"); ("C|WGF", "FGC|W"); ("FGC|W", "G|WCF"); ( "FWG|C", "G|WCF"); ("G|WCF", "FG|WC"), ("FG|WC", "|WGCF").
+
+1. "Failure": "FC|WG", "WGC|F", "GC|WF", "WG|CF", "FW|GC"
+2. "FWGC|": "GC|WF", "WC|GF", "WGC|F", "WG|CF" 
+3. "WGC|F": "Failure", "FWGC|"
+4. "GC|WF": "Failure", "FWGC|", "FGC|W" 
+5. "WC|GF": "FWGC|", "FWC|G"
+6. "WG|CF": "Failure", "FWGC|", "FWG|C"
+7. "FC|WG": "Failure", "C|WGF"
+8. "C|WGF": "FC|WG", "FWC|G", "FGC|W"
+9. "FGC|W": "GC|WF", "C|WGF", "G|WCF"
+10. "FWC|G": "WC|GF", "C|WGF", "W|GCF"
+11. "W|GCF": "FWC|G", "FW|GC"
+12. "FW|GC": "Failure", "W|GCF"
+13. "FWG|C": "WG|CF", "G|WCF"
+14. "G|WCF": "FGC|W", "FWG|C", "FG|WC"
+15. "FG|WC": "G|WCF", "|WGCF"
+16. "|WGCF": "FG|WC"
+
+	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16
+1	0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+2	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0
+3	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+4	1	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0
+5	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0
+6	0	0	1	0	0	0	0	1	0	0	1	0	1	0	0	0
+7	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+8	0	0	0	0	0	1	0	0	1	1	0	0	0	0	0	0
+9	0	0	0	1	0	0	0	1	0	1	0	0	0	0	1	0
+10	0	0	0	0	1	0	0	1	1	0	0	0	0	0	0	0
+11	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	1
+12	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0
+13	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0
+14	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0
+15	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0
+16	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+
+
