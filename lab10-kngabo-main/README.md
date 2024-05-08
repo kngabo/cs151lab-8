@@ -2,7 +2,7 @@
 # lab10
 Lab 10: Graphs
 
-Name: Your Name Goes Here
+Name: Kelig Ngabo
 
 Lab Instructions: [https://cs.oberlin.edu/~cs151/lab-10/](https://cs.oberlin.edu/~cs151/lab-10/)
 
