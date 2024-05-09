@@ -1,21 +1,21 @@
 public class Edge {
     
-    private Vertex vertex1;
-    private Vertex vertex2;
+    private Vertex source;
+    private Vertex destination;
     private String label;
 
-    public Edge(Vertex vertex1, Vertex vertex2, String label){
-        this.vertex1 = vertex1;
-        this.vertex2 = vertex2;
+    public Edge(Vertex source, Vertex destination, String label){
+        this.source = source;
+        this.destination = destination;
         this.label = label;
     }
     
     public Vertex getSource(){
-        return this.vertex1;
+        return this.source;
     }
 
     public Vertex getDestination(){
-        return this.vertex2;
+        return this.destination;
     }
 
     public String getLabel(){

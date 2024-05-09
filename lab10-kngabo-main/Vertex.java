@@ -4,7 +4,7 @@ import java.util.List;
 public class Vertex {
     
     public String name;
-    private List<Edge> edgeList;
+    private List<String> edgeList;
     
     public Vertex(String name){
         this.name = name;
@@ -15,7 +15,7 @@ public class Vertex {
         return this.name;
     }
 
-    public List<Edge> getList(){
+    public List<String> getList(){
         return this.edgeList;
     }
     public int size(){

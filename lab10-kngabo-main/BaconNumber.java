@@ -7,7 +7,7 @@ public class BaconNumber {
     private Graph graph;
     
     public BaconNumber(String filePath) throws FileNotFoundException{
-        this.graph = graph;
+        this.graph = new Graph();
         
         this.helper(filePath);
     }
@@ -16,11 +16,11 @@ public class BaconNumber {
         Set<String> names = new HashSet<String>();
         Set<String> titles = new HashSet<String>();
         Map<String, List<String>> actorsToMovies = new HashMap<>();
-        Map<List<String>, String> moviesToActors = new HashMap<>();
-        List<String> tList = new ArrayList<String>();
+        Map<String, List<String>> moviesToActors = new HashMap<>();
+        // List<String> tList = new ArrayList<String>();
+        // List<String> nList = new ArrayList<String>();
 
         File file = new File(filePath);
-
         Scanner lineScanner = new Scanner(file);
 
         while(lineScanner.hasNextLine()){
@@ -31,11 +31,22 @@ public class BaconNumber {
             String title = split[1];
 
             names.add(name);
-            titles.add(title);
-            tList.add(title);
-            actorsToMovies.put(name, tList);
-            moviesToActors.put(tList, name);
+            titles.add(title);  
+            List<String> aList = actorsToMovies.get(name);
+            List<String> tList = moviesToActors.get(title);
+            aList.add(title);
+            tList.add(name);
 
+            if(!actorsToMovies.containsKey(name)){
+                actorsToMovies.put(name, new ArrayList<>());
+            }
+
+            if(!moviesToActors.containsKey(title)){
+                actorsToMovies.put(title, new ArrayList<>());
+            }
+
+            actorsToMovies.get(name).add(title);
+            moviesToActors.get(title).add(name);
         }
 
         for (String actor : names) {
@@ -43,8 +54,14 @@ public class BaconNumber {
             graph.addVertex(vertex);
         }
 
-        for (Vertex vertex : graph.getVertexList()) {
-            
+        for (String actor : names) {
+            List<String> showList = actorsToMovies.get(actor);
+            for (String show : showList) {
+                List<String> actorNamesList = moviesToActors.get(show);
+                for (String actorName : actorNamesList) {
+                    graph.addEdge(actor, actorName, show);
+                }
+            }
         }
 
 

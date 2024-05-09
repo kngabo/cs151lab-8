@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Graph {
     
-    private HashMap<String, List<Edge>> graph;
+    private HashMap<String, List<String>> graph;
     private List<Vertex> vCollection;
 
     public Graph(){
-        this.graph = new HashMap<String, List<Edge>>();
+        this.graph = new HashMap<String, List<String>>();
         this.vCollection = new ArrayList<>();
     }
     
@@ -21,9 +21,9 @@ public class Graph {
     }
 
     public void addEdge(Vertex source, Vertex destination, String label){
-        List<Edge> bucket = graph.get(source.getName());
+        List<String> bucket = graph.get(source.getName());
         Edge edge = new Edge(source, destination, label);
-        bucket.add(edge);      
+        bucket.add(edge.getLabel());      
     }
 
     public List<Vertex> getVertexList(){
