@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Graph {
     
@@ -23,10 +21,29 @@ public class Graph {
     public void addEdge(Vertex source, Vertex destination, String label){
         List<String> bucket = graph.get(source.getName());
         Edge edge = new Edge(source, destination, label);
-        bucket.add(edge.getLabel());      
+        bucket.add(edge.getLabel());  
+        source.getList().add(destination.getName());    
     }
 
     public List<Vertex> getVertexList(){
         return this.vCollection;
     }
+
+    public Vertex getVertex(String string){
+        
+        for (Vertex vertex : this.vCollection) {
+            if(vertex.name == string){
+                return vertex;
+            }
+        }
+        return null;
+    }
+
+    public boolean containsVertex(Vertex vertex){
+        for (Vertex eachVertex : this.vCollection) {
+            return eachVertex == vertex;
+        }
+        return false;
+    }
+    
 }

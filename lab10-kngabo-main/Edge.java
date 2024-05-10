@@ -21,4 +21,9 @@ public class Edge {
     public String getLabel(){
         return this.label;
     }
+
+    public Edge getEdge(){
+        return this;
+    }
+
 }

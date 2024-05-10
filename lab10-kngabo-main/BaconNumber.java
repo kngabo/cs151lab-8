@@ -6,12 +6,10 @@ public class BaconNumber {
     
     private Graph graph;
     
-    public BaconNumber(String filePath) throws FileNotFoundException{
+    public BaconNumber(){
         this.graph = new Graph();
-        
-        this.helper(filePath);
     }
-    private void helper(String filePath){
+    private void helper() {
 
         Set<String> names = new HashSet<String>();
         Set<String> titles = new HashSet<String>();
@@ -20,34 +18,43 @@ public class BaconNumber {
         // List<String> tList = new ArrayList<String>();
         // List<String> nList = new ArrayList<String>();
 
-        File file = new File(filePath);
-        Scanner lineScanner = new Scanner(file);
+        
+        try {
+            File file = new File("imdb_small.txt");
 
-        while(lineScanner.hasNextLine()){
+            Scanner lineScanner = new Scanner(file);
 
-            String line = lineScanner.nextLine();
-            String[] split = line.split("\t");
-            String name = split[0];
-            String title = split[1];
+            while(lineScanner.hasNextLine()){
 
-            names.add(name);
-            titles.add(title);  
-            List<String> aList = actorsToMovies.get(name);
-            List<String> tList = moviesToActors.get(title);
-            aList.add(title);
-            tList.add(name);
+                String line = lineScanner.nextLine();
+                String[] split = line.split("\t");
+                String name = split[0];
+                String title = split[1];
 
-            if(!actorsToMovies.containsKey(name)){
-                actorsToMovies.put(name, new ArrayList<>());
+                names.add(name);
+                titles.add(title);  
+
+                
+
+                if(!actorsToMovies.containsKey(name)){
+                    actorsToMovies.put(name, new ArrayList<>());
+                }else{
+                    actorsToMovies.get(name).add(title);
+                }
+
+                if(!moviesToActors.containsKey(title)){
+                    moviesToActors.put(title, new ArrayList<>());
+                }else{
+                    moviesToActors.get(title).add(name);
+                }
+
             }
 
-            if(!moviesToActors.containsKey(title)){
-                actorsToMovies.put(title, new ArrayList<>());
-            }
+            lineScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }   
 
-            actorsToMovies.get(name).add(title);
-            moviesToActors.get(title).add(name);
-        }
 
         for (String actor : names) {
             Vertex vertex = new Vertex(actor);
@@ -58,14 +65,38 @@ public class BaconNumber {
             List<String> showList = actorsToMovies.get(actor);
             for (String show : showList) {
                 List<String> actorNamesList = moviesToActors.get(show);
-                for (String actorName : actorNamesList) {
-                    graph.addEdge(actor, actorName, show);
+                for (String coActor : actorNamesList) {
+                    Vertex actorVertex = graph.getVertex(actor);
+                    Vertex coActorVertex = graph.getVertex(coActor);
+                    graph.addEdge(actorVertex, coActorVertex, show);
                 }
             }
         }
+        System.out.println(actorsToMovies.size());
+        System.out.println(moviesToActors.size());
+    }
 
+    public List<String> findPath(Vertex center, Vertex goal){
+
+        Queue<Vertex> frontierQueue = new LinkedList<Vertex>();
+        Set<Vertex> exploredSet = new HashSet<Vertex>();
+        frontierQueue.add(center);
+
+        while(frontierQueue.isEmpty() == false){
+            Vertex removedVertex = frontierQueue.remove();
+            exploredSet.add(removedVertex);
+            
+            for (Vertex neighbour : removedVertex.getList()) {
+                
+            }
 
         }
+
+    }
+
+    public static void main(String[] args) {
+            BaconNumber bacon = new BaconNumber();
+            bacon.helper();
 
     }
 }

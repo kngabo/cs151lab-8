@@ -21,4 +21,5 @@ public class Vertex {
     public int size(){
         return this.edgeList.size();
     }
+
 }

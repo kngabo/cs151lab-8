@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,7 @@ public class GraphTest {
         Vertex SA = new Vertex("South-Africa");
 
         graph.addVertex(kelig);
+        graph.addVertex(kelig); // Test Duplilcates
         graph.addVertex(tharcisse);
         graph.addVertex(samke);
         graph.addVertex(rwanda);
@@ -48,5 +50,6 @@ public class GraphTest {
 
         int expected = 6;
         assertEquals(expected, graph.getVertexList().size());
+        assertTrue(graph.containsVertex(kelig));
     }
 }
