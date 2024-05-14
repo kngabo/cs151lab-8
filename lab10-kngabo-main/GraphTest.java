@@ -52,4 +52,32 @@ public class GraphTest {
         assertEquals(expected, graph.getVertexList().size());
         assertTrue(graph.containsVertex(kelig));
     }
+
+
+    @Test
+    void testNoDuplicateEdges() {
+        Graph graph = new Graph();
+        Vertex kelig = new Vertex("Kelig");
+        Vertex rwanda = new Vertex("Rwanda");
+
+        graph.addVertex(kelig);
+        graph.addVertex(rwanda);
+        graph.addEdge(kelig, rwanda, "citizen");
+        graph.addEdge(kelig, rwanda, "citizen"); // Attempt to add duplicate
+
+        int expected = 1;
+        assertEquals(expected, kelig.getEdgeList().size());
+    }
+    
+    @Test
+    void testNullVertexHandling() {
+        Graph graph = new Graph();
+        Vertex kelig = new Vertex("Kelig");
+
+        graph.addVertex(kelig);
+        graph.addVertex(null); // Attempt to add null
+
+        int expected = 1;
+        assertEquals(expected, graph.getVertexList().size());
+    }
 }
